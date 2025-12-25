@@ -1,4 +1,22 @@
-# Building a simple TCP port scanner in C
+# Measure password's entropy (passwordCheck)
+
+Password's entropy is a key concept in cybersecurity. It measures the difficulty for an attacker to uess a password. The higher the entropy, the more difficult it is for an attacker to guess a password.
+
+# Buffer overflow
+
+### Safe practice habits: using strncpy instead of scanf( ) or gets( )
+
+The strncpy( ) function is defined in the `<string.h>` header file. It copies the first n characters from one string into the memory of another string. This does not add a null terminating character to the copied data, so it needs to be manually added afterwards.
+
+## Syntax
+
+```java
+strncpy(char * destination, char * source, size_t n);
+```
+
+The `size_t` data type is a positive integer.
+
+### Building a simple TCP port scanner in C (portScanner)
 
 Port scanning is a technique used to determine which ports on a target host are open. A target is defined and ports on this target are scanned.
 
