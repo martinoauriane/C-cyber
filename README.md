@@ -47,3 +47,10 @@ int socket(int domain, int type, int protocol)
 - domain: the family of socket protocol (if using IPv4, AF_INET)
 - type : the type of socket, generally SOCK_STREAM
 - protocol: The protocol we want to use with the socket. Generally, there is only one valid protocol by socket type, so we can put the value 0.
+
+### RFID skimming
+
+Modern payment contain a [RFID](https://en.wikipedia.org/wiki/RFID "RFID") chip to transmit card information wirelessly to enable [contactless payments](https://en.wikipedia.org/wiki/Contactless_payment "Contactless payment"), which has become increasingly common.
+Criminals can take advantage of this technology by using a scanner to wirelessly read a victim's payment card in the same way that a cash register scans it, when making a contactless payment.
+
+Some security experts have voiced concerns about a phenomenon called RFID skimming, in which a thief with an RFID reader may be able to steal your credit card number or personal information simply by walking within a few feet of you.
