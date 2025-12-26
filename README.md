@@ -54,3 +54,46 @@ Modern payment contain a [RFID](https://en.wikipedia.org/wiki/RFID "RFID") chip 
 Criminals can take advantage of this technology by using a scanner to wirelessly read a victim's payment card in the same way that a cash register scans it, when making a contactless payment.
 
 Some security experts have voiced concerns about a phenomenon called RFID skimming, in which a thief with an RFID reader may be able to steal your credit card number or personal information simply by walking within a few feet of you.
+
+# Entropy
+
+Un ransomware :
+
+- chiffre les fichiers
+- rend les octets **uniformément répartis**
+- provoque une **hausse brutale d’entropie**
+
+We can use Shannon's formula to calculate entropy.
+
+Example :
+
+File A:
+
+`AAAAAAAAAAA`
+
+Very repetitive. Entropy ~ 0
+
+File B :
+
+`A8&xQ!Pz3@`
+
+Entropy ~ 8
+
+| Valeur | Signification        |
+| ------ | -------------------- |
+| ~0     | Very repetitive file |
+| 3-5    | Text                 |
+| 6-7    | Compressed data      |
+| 7.5-8  | Very suspect file    |
+
+# File Magic Numbers
+
+Magic numbers are the first bits of a file which uniquely identify the file type. The program magicNumber.c opens a file in binary mode, reads the first 8 bytes. It compares the 8 bytes with known magic numbers, using the function memcmp. It then returns the detected type or "Unknown file type". The main function handles the input and prints the result.
+
+| Type        | Magic Number (hex)        | ASCII |
+| ----------- | ------------------------- | ----- |
+| ELF (Linux) | `7F 45 4C 46`             |       |
+| PNG         | `89 50 4E 47 0D 0A 1A 0A` |       |
+| JPEG        | `FF D8 FF`                |       |
+| PDF         | `25 50 44 46`             |       |
+| ZIP         | `50 4B 03 04`             |       |
