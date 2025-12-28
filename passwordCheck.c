@@ -45,7 +45,11 @@ int main() {
     char password[96];
     printf("Please enter your password");
     scanf("%95s", password);
-    int so = checkPassword(password);
-    printf("so = %d\n", so);
+    int isSafe = checkPassword(password);
+    if(isSafe == 0){
+        printf("Strong password.\n");
+    } else {
+        printf("Weak password.\n");
+    }
     return 0;
 }

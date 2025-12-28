@@ -37,17 +37,29 @@ XOR has many uses, especially in cryptography, hashing, and in pseudo-random num
 
 # passwordCheck.c : Measuring a password's entropy
 
-Password's entropy is a key concept in cybersecurity. It measures the difficulty for an attacker to uess a password. The higher the entropy, the more difficult it is for an attacker to guess a password.
+The program takes an input as a string and evaluate if it is a valid password. The password is valid if it has numbers, capital and small alphabets, and a length of at least 7 characters.
 
 # reverseShell.c : implementing a reverse Shell
 
 In a standard remote shell attack, attackers connect a machine they control to the target’s remote network host, requesting a shell session. This tactic is known as a bind shell. Attackers can use a reverse shell if a remote host is not publicly accessible (i.e., due to firewall protection or a non-public IP). The target machine initiates the outgoing connection in a reverse shell attack and establishes the shell session with the listening network host.
 
-It is a method attackers use to gain remote control over a target system. Unlike standard shells, where the attacker connects directly to the victim’s system, a reverse shell reverses the process. Specifically, the compromised machine initiates a connection to the attacker’s server.
+A reverseShell is a method attackers use to gain remote control over a target system. Unlike standard shells, where the attacker connects directly to the victim’s system, a reverse shell reverses the process. Specifically, the compromised machine initiates a connection to the attacker’s server.
+
+#### Strategy
+
+To create a Windows reverse shell, the program uses websockets.In this scenario, the program is the client. It initiates an outgoing connexion. The IP address is that of the distant host : the target machine in which the reverse Shell will be implemented. If the connexion succeeds, a bi-directional stream is opened and the two machines can now exchange data.
+
+First, the `STARTUPINFO` structure is initialized and configured. This structure does **not** describe the process itself, but \*\*how the process must be initialized by the operating system. By setting the flag `STARTF_USESTDHANDLES`, the program explicitly tells Windows to use the custom handles provided for standard input, output, and error. Instead of being connected to the console (keyboard and screen), these standard streams are redirected to the network socket.
+
+As a result, anything the process writes to standard output or standard error is sent through the socket.
 
 #### cmd.exe
 
-The process cmd.exe is a generic Windows process opening a console in text mode and enabling to launch applications through commands. Starts a new instance of command interpretor, cmd.exe.
+The process cmd.exe is a generic Windows process opening a console in text mode and enabling to launch applications through commands. It starts a new instance of command interpretor.
+
+#### Conclusion
+
+This illustrates a key operating system concept:  **processes do not write directly to the screen or read directly from the keyboard; they interact with abstract handles, and the operating system decides where those handles are connected** .
 
 # bufferOverflow.c : warning against Buffer overflow
 
@@ -136,8 +148,8 @@ Entropy ~ 8
 
 Magic numbers are the first bits of a file which uniquely identify the file type. The program magicNumber.c opens a file in binary mode, reads the first 8 bytes. It compares the 8 bytes with known magic numbers, using the function memcmp. It then returns the detected type or "Unknown file type". The main function handles the input and prints the result.
 
-| Type        | Magic Number (hex)        | ASCII |
-| ----------- | ------------------------- | ----- |
+| Type        | Magic Number (hex)          | ASCII |
+| ----------- | --------------------------- | ----- |
 | ELF (Linux) | `7F 45 4C 46`             |       |
 | PNG         | `89 50 4E 47 0D 0A 1A 0A` |       |
 | JPEG        | `FF D8 FF`                |       |

