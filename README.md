@@ -2,6 +2,16 @@
 
 Password's entropy is a key concept in cybersecurity. It measures the difficulty for an attacker to uess a password. The higher the entropy, the more difficult it is for an attacker to guess a password.
 
+# Reverse Shell
+
+In a standard remote shell attack, attackers connect a machine they control to the target’s remote network host, requesting a shell session. This tactic is known as a bind shell. Attackers can use a reverse shell if a remote host is not publicly accessible (i.e., due to firewall protection or a non-public IP). The target machine initiates the outgoing connection in a reverse shell attack and establishes the shell session with the listening network host.
+
+It is a method attackers use to gain remote control over a target system. Unlike standard shells, where the attacker connects directly to the victim’s system, a reverse shell reverses the process. Specifically, the compromised machine initiates a connection to the attacker’s server.
+
+#### cmd.exe
+
+The process cmd.exe is a generic Windows process opening a console in text mode and enabling to launch applications through commands. Starts a new instance of command interpretor, cmd.exe.
+
 # Buffer overflow
 
 ### Safe practice habits: using strncpy instead of scanf( ) or gets( )
