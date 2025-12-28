@@ -4,7 +4,7 @@
 
 char manual_xor(char a, char b){
   if(a == b)
-    return '0'; // 0 XOR 0 = 0, 1 XOR 1 = 1
+    return '0'; // 0 XOR 0 = 0, 1 XOR 1 = 0
   else 
     return '1'; // O XOR 1 = 1, 1 XOR 0 = 1
 }
@@ -19,7 +19,7 @@ void xor_binary_manual(const char *binary, const char *key, char *result){
 
 int main(){
   char binary[] = "010100111010001";
-  char key[] = "1100100101101101"
+  char key[] = "11001001011011010";
   char result[100]; 
 
   xor_binary_manual(binary, key, result);

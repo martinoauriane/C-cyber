@@ -1,4 +1,8 @@
-# RC4 encryption
+# C Projects
+
+This repo is dedicated to the implementation of C cybersecurity projects.
+
+# RC4.c : implementing RC4 encryption
 
 #### Symmetric encryption
 
@@ -27,11 +31,15 @@ Then, for each character in the plaintext, a keystream is generated. This keystr
 
 Decryption works the same way: XORing the ciphertext with the same keystream restores the original plaintext.
 
-# Measure password's entropy (passwordCheck)
+#### The XOR bitwise operator
+
+XOR has many uses, especially in cryptography, hashing, and in pseudo-random number generation. Since XOR is reversible, A ^B = C, then C ^B = A. The number B is essentially the 'key' to encrypt A to C and to decrypt C back to A.
+
+# passwordCheck.c : Measuring a password's entropy
 
 Password's entropy is a key concept in cybersecurity. It measures the difficulty for an attacker to uess a password. The higher the entropy, the more difficult it is for an attacker to guess a password.
 
-# Reverse Shell
+# reverseShell.c : implementing a reverse Shell
 
 In a standard remote shell attack, attackers connect a machine they control to the target’s remote network host, requesting a shell session. This tactic is known as a bind shell. Attackers can use a reverse shell if a remote host is not publicly accessible (i.e., due to firewall protection or a non-public IP). The target machine initiates the outgoing connection in a reverse shell attack and establishes the shell session with the listening network host.
 
@@ -41,7 +49,7 @@ It is a method attackers use to gain remote control over a target system. Unlike
 
 The process cmd.exe is a generic Windows process opening a console in text mode and enabling to launch applications through commands. Starts a new instance of command interpretor, cmd.exe.
 
-# Buffer overflow
+# bufferOverflow.c : warning against Buffer overflow
 
 ### Safe practice habits: using strncpy instead of scanf( ) or gets( )
 
@@ -55,7 +63,7 @@ strncpy(char * destination, char * source, size_t n);
 
 The `size_t` data type is a positive integer.
 
-### Building a simple TCP port scanner in C (portScanner)
+# portScanner. c: Building a simple TCP port scanner in C (portScanner)
 
 Port scanning is a technique used to determine which ports on a target host are open. A target is defined and ports on this target are scanned.
 
@@ -87,14 +95,13 @@ int socket(int domain, int type, int protocol)
 - type : the type of socket, generally SOCK_STREAM
 - protocol: The protocol we want to use with the socket. Generally, there is only one valid protocol by socket type, so we can put the value 0.
 
-### RFID skimming
+# rfidskimming.c : Implementing RFID skimming
 
-Modern payment contain a [RFID](https://en.wikipedia.org/wiki/RFID "RFID") chip to transmit card information wirelessly to enable [contactless payments](https://en.wikipedia.org/wiki/Contactless_payment "Contactless payment"), which has become increasingly common.
-Criminals can take advantage of this technology by using a scanner to wirelessly read a victim's payment card in the same way that a cash register scans it, when making a contactless payment.
+Modern payment contain a [RFID](https://en.wikipedia.org/wiki/RFID "RFID") chip to transmit card information wirelessly to enable [contactless payments](https://en.wikipedia.org/wiki/Contactless_payment "Contactless payment"), which has become increasingly common. Criminals can take advantage of this technology by using a scanner to wirelessly read a victim's payment card in the same way that a cash register scans it, when making a contactless payment.
 
 Some security experts have voiced concerns about a phenomenon called RFID skimming, in which a thief with an RFID reader may be able to steal your credit card number or personal information simply by walking within a few feet of you.
 
-# Entropy
+# fileEntropy.c : Measuring a file's entropy
 
 Un ransomware :
 
@@ -125,7 +132,7 @@ Entropy ~ 8
 | 6-7    | Compressed data      |
 | 7.5-8  | Very suspect file    |
 
-# File Magic Numbers
+# magicNumber.c : Reading a file's magic numbers
 
 Magic numbers are the first bits of a file which uniquely identify the file type. The program magicNumber.c opens a file in binary mode, reads the first 8 bytes. It compares the 8 bytes with known magic numbers, using the function memcmp. It then returns the detected type or "Unknown file type". The main function handles the input and prints the result.
 
