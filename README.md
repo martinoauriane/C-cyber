@@ -8,6 +8,13 @@ Symmetric encryption refers to an encryption algorithm that uses the same key fo
 
 Shortly put, RC4 was designed by Ron Rivest of RSA Secuirty in 1987. RC4 is a fast and simple stream cipher that uses a pseudo-random number generation algorithm the generate a keystream. The keystream can be used in a XOR operation with plaintext to generate ciphertext. The same keystream can then be used in a XOR operation against the ciphertext to generate the original plaintext.
 
+RC4 has been legitimately implemented in a number of areas where speed and privacy are of concern. In the past, both WEP and TLS used RC4 to protect data send across the wire.
+
+RC4 is implemented in two main phases:
+
+1. A Key Scheduling Algorithm is executed using a symmetric key to create an array of 256 bytes. This array is then shuffled an complexified using the symmetric key. During the initialization process, the main function of the key is to scramble the S-box,
+2. This array is then used in a pseudo-random generation algorithm to generate a keystream which used in plaintext XOR operation, will produce a cipher stream that can be decoded using the same key.
+
 #### RC4 encryption process
 
 We start with an S-box array with a 256 octets length.
