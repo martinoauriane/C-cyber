@@ -1,3 +1,25 @@
+# RC4 encryption
+
+#### Symmetric encryption
+
+Symmetric encryption refers to an encryption algorithm that uses the same key for encryption and decryption. This is the case for the RC4 algorithm. In most symmetric algorithms, the encryption key and the decryption key are the same. Therefore the algorithm retorting to symmetric encryption can also be called a single key algorithm. It requires teh send and receiver to agree on a key before communicating securely. Besides, the security of the symmetric algorithm depends on the key. Leaking the key means that anyone can decrypt the messages they send or receive. Therefore, the condifentiality of the key is very important to the security of communication.
+
+#### What is RC4?
+
+Shortly put, RC4 was designed by Ron Rivest of RSA Secuirty in 1987. RC4 is a fast and simple stream cipher that uses a pseudo-random number generation algorithm the generate a keystream. The keystream can be used in a XOR operation with plaintext to generate ciphertext. The same keystream can then be used in a XOR operation against the ciphertext to generate the original plaintext.
+
+#### RC4 encryption process
+
+We start with an S-box array with a 256 octets length.
+
+The user gives RC4 a key and a plain text to encode.
+
+During the initialization process, the key is used to scramble the S-box.
+
+Then, for each character in the plaintext, a keystream is generated. This keystream is used to perform a XOR operation on the plaintext to obtain the ciphertext. The decryption process is exactly the same.
+
+Decryption works the same way: XORing the ciphertext with the same keystream restores the original plaintext.
+
 # Measure password's entropy (passwordCheck)
 
 Password's entropy is a key concept in cybersecurity. It measures the difficulty for an attacker to uess a password. The higher the entropy, the more difficult it is for an attacker to guess a password.
