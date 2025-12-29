@@ -6,7 +6,7 @@ This repo is dedicated to the implementation of C cybersecurity projects.
 
 #### Symmetric encryption
 
-Symmetric encryption refers to an encryption algorithm that uses the same key for encryption and decryption. This is the case for the RC4 algorithm. In most symmetric algorithms, the encryption key and the decryption key are the same. Therefore the algorithm retorting to symmetric encryption can also be called a single key algorithm. It requires teh send and receiver to agree on a key before communicating securely. Besides, the security of the symmetric algorithm depends on the key. Leaking the key means that anyone can decrypt the messages they send or receive. Therefore, the condifentiality of the key is very important to the security of communication.
+Symmetric encryption refers to an encryption algorithm that uses the same key for encryption and decryption. This is the case for the RC4 algorithm. In most symmetric algorithms, the encryption key and the decryption key are the same. Therefore the algorithm retorting to symmetric encryption can also be called a single key algorithm. It requires the sender and receiver to agree on a key before communicating securely. Besides, the security of the symmetric algorithm depends on the key. Leaking the key means that anyone can decrypt the messages they send or receive. Therefore, the condifentiality of the key is very important to the security of communication.
 
 #### What is RC4?
 
@@ -16,20 +16,19 @@ RC4 has been legitimately implemented in a number of areas where speed and priva
 
 RC4 is implemented in two main phases:
 
-1. A Key Scheduling Algorithm is executed using a symmetric key to create an array of 256 bytes. This array is then shuffled an complexified using the symmetric key. During the initialization process, the main function of the key is to scramble the S-box,
+1. A Key Scheduling Algorithm is executed using a symmetric key to create an array of 256 bytes. This array is then shuffled an complexified using the symmetric key. During the initialization process, the main function of the key is to scramble the S-box.
 2. This array is then used in a pseudo-random generation algorithm to generate a keystream which used in plaintext XOR operation, will produce a cipher stream that can be decoded using the same key.
 
 #### RC4 encryption process
 
-We start with an S-box array with a 256 octets length.
+Steps :
 
-The user gives RC4 a key and a plain text to encode.
-
-During the initialization process, the key is used to scramble the S-box.
-
-Then, for each character in the plaintext, a keystream is generated. This keystream is used to perform a XOR operation on the plaintext to obtain the ciphertext. The decryption process is exactly the same.
-
-Decryption works the same way: XORing the ciphertext with the same keystream restores the original plaintext.
+- The user gives RC4 a key and a plain text to encode.
+- We start with an S-box array with a 256 octets length.
+- During the initialization process, the key is used to scramble the S-box.
+- Then, for each character in the plaintext, a keystream is generated.
+- This keystream is used to perform a XOR operation on the plaintext to obtain the ciphertext.
+- Decryption works the same way: XORing the ciphertext with the same keystream restores the original plaintext.
 
 #### The XOR bitwise operator
 
@@ -131,11 +130,11 @@ Ransomware:
 - causes a **sudden increase in entropy**
 ```
 
-#### Shannon's formula
+#### Shannon's entropy
 
 Shannon's entropy is a mathematical function which, intuitively, corresponds to the quantity of information contained in an information source. This source can be a text written in a given language, an electric signal or a random informatic file (octets). The more the source emits different informations, the bigger the entropy. For example, if a source always sends the same symbol, for example the letter 'a', then its entropy is none, or minimal.
 
-In maths, an avrage is calculated with:
+In maths, an average is calculated with:
 
 ```
 average = Σ (value * probability)

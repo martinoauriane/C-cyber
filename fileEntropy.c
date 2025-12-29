@@ -24,4 +24,12 @@ double calculate_entropy(const char *filename) {
     return entropy;
 }
 
-
+int main(int argc, char *argv){
+  if(argc < 2){
+    printf("Error. At least two args are needed. Please enter the name of the file you'd like to the calculate the entropy for. <./fileEntropy.c> <filename>");
+    return 1;
+  }
+  double entropy = 0;
+  entropy = calculate_entropy(argv[1]);
+  printf("L'entropie du fichier %s est égale à %lf\n", argv[1], entropy); 
+}
