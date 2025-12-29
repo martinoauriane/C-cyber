@@ -59,9 +59,13 @@ The process cmd.exe is a generic Windows process opening a console in text mode 
 
 #### Conclusion
 
-This illustrates a key operating system concept:  **processes do not write directly to the screen or read directly from the keyboard; they interact with abstract handles, and the operating system decides where those handles are connected** .
+This illustrates a key operating system concept: **processes do not write directly to the screen or read directly from the keyboard; they interact with abstract handles, and the operating system decides where those handles are connected** .
 
 # bufferOverflow.c : warning against Buffer overflow
+
+A buffer overflow occurs when the volume of data exceeds the storage capacity of the memory buffer. As a result, the program attempting to write the data to the buffer overwrites adjacent memory locations.
+
+For example, a buffer for log-in credentials may be designed to expect username and password inputs of 8 bytes. So if a transaction involves an input of 10 bytes (that is, 2 bytes more than expected), the program may write the excess data past the buffer boundary.
 
 ### Safe practice habits: using strncpy instead of scanf( ) or gets( )
 
@@ -81,9 +85,7 @@ Port scanning is a technique used to determine which ports on a target host are 
 
 ### Using sockets as a way to scan ports on a given target address
 
-We're going to use sockets as a way to communicate with any target address and scan one by one its local ports. Indeed, sockets are a way to communicate with a target server/ target address by establishing a communication between the client and the server.
-
-The fundamental structures to indicate a target IP address and target connexion port can be found in <netinet/in.h> library. There exists one for IPv4 and one for IPv6. For an IPv4 address, the struct sockaddr_in is as follows:
+The program uses sockets as a way to communicate with any target address and scan one by one its local ports. Sockets are a way to communicate with a target server/ target address by establishing a communication between the client and the server. The fundamental structures to indicate a target IP address and target connexion port can be found in <netinet/in.h> library. There exists one for IPv4 and one for IPv6. For an IPv4 address, the struct sockaddr_in is as follows:
 
 struct sockaddr_in {
 
@@ -99,9 +101,9 @@ struct sockaddr_in {
 - sin_port: The port to which we wish to connect.
 - sin_addr : represents tehe IPv4 address.
 
-Preparing a socket : We use <sys/socket.h> to create a new socket:
+Preparing a socket : The module <sys/socket.h> is used to create a new socket:
 
-int socket(int domain, int type, int protocol)
+    int socket(int domain, int type, int protocol)
 
 - domain: the family of socket protocol (if using IPv4, AF_INET)
 - type : the type of socket, generally SOCK_STREAM
@@ -111,45 +113,70 @@ int socket(int domain, int type, int protocol)
 
 Modern payment contain a [RFID](https://en.wikipedia.org/wiki/RFID "RFID") chip to transmit card information wirelessly to enable [contactless payments](https://en.wikipedia.org/wiki/Contactless_payment "Contactless payment"), which has become increasingly common. Criminals can take advantage of this technology by using a scanner to wirelessly read a victim's payment card in the same way that a cash register scans it, when making a contactless payment.
 
-Some security experts have voiced concerns about a phenomenon called RFID skimming, in which a thief with an RFID reader may be able to steal your credit card number or personal information simply by walking within a few feet of you.
+Some security experts have voiced concerns about a phenomenon called RFID skimming, in which a thief with an RFID reader may be able to steal your credit card number or personal information simply by walking within a few feet of people.
 
 # fileEntropy.c : Measuring a file's entropy
 
-Un ransomware :
+This project implements a file entropy calculator in C. Entropy measures the randomness of data within a file, which is a key concept in cryptography, data compression, and malware analysis. In case of a file having an unusually high entropy, it could be a malware. A ransomware is a type of malicious software that prevents the user from accessing his computer files, systems, or networks and demands he pays a ransom for their return. A Ransomware:
 
-- chiffre les fichiers
-- rend les octets **uniformément répartis**
-- provoque une **hausse brutale d’entropie**
+- encrypts files
+- makes bytes evenly distributed
+- causes a sudden increase in entropy
 
-We can use Shannon's formula to calculate entropy.
+```
+Ransomware:
+
+- encrypt files
+- makes bytes **evenly distributed**
+- causes a **sudden increase in entropy**
+```
+
+#### Shannon's formula
+
+Shannon's entropy is a mathematical function which, intuitively, corresponds to the quantity of information contained in an information source. This source can be a text written in a given language, an electric signal or a random informatic file (octets). The more the source emits different informations, the bigger the entropy. For example, if a source always sends the same symbol, for example the letter 'a', then its entropy is none, or minimal.
+
+In maths, an avrage is calculated with:
+
+```
+average = Σ (value * probability)
+```
+
+- value : symbol information log2 p(x)
+- probability : p(x)
+
+```
+H = Σ p(x) * ( -log₂(p(x)) )
+```
+
+- H : Shannon's entropy. Unit: bits.
+- x : one octet (from 0 to 255). example: x = 'A'
+- p(x) : probability of x showing up. p(x) = freq[ i ] / size. Example : A file of hundred octets. 'A' appears 50 times. Therefore p( 'A' ) = 50 / 100 = 0.5
+- log₂ : Answers the question how many bits are needed to describe this symbol?
+- Σ : Sum for information of all available symbols.
 
 Example :
 
-File A:
-
-`AAAAAAAAAAA`
+- File A: `AAAAAAAAAAA`
 
 Very repetitive. Entropy ~ 0
 
-File B :
-
-`A8&xQ!Pz3@`
+- File B : `A8&xQ!Pz3@`
 
 Entropy ~ 8
 
-| Valeur | Signification        |
-| ------ | -------------------- |
-| ~0     | Very repetitive file |
-| 3-5    | Text                 |
-| 6-7    | Compressed data      |
-| 7.5-8  | Very suspect file    |
+| Value | Meaning              |
+| ----- | -------------------- |
+| ~0    | Very repetitive file |
+| 3-5   | Text                 |
+| 6-7   | Compressed data      |
+| 7.5-8 | Very suspect file    |
 
 # magicNumber.c : Reading a file's magic numbers
 
 Magic numbers are the first bits of a file which uniquely identify the file type. The program magicNumber.c opens a file in binary mode, reads the first 8 bytes. It compares the 8 bytes with known magic numbers, using the function memcmp. It then returns the detected type or "Unknown file type". The main function handles the input and prints the result.
 
-| Type        | Magic Number (hex)          | ASCII |
-| ----------- | --------------------------- | ----- |
+| Type        | Magic Number (hex)        | ASCII |
+| ----------- | ------------------------- | ----- |
 | ELF (Linux) | `7F 45 4C 46`             |       |
 | PNG         | `89 50 4E 47 0D 0A 1A 0A` |       |
 | JPEG        | `FF D8 FF`                |       |

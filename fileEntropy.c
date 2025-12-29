@@ -4,7 +4,7 @@
 double calculate_entropy(const char *filename) {
     FILE *file = fopen(filename, "rb"); // read binary mode
     if (!file) return 0.0;
-    int freq[256] = {0}; // freq[65] = nombre de fois que l’octet 65 ('A') apparaît
+    int freq[256] = {0}; // freq[65] = number of times 65 ('A') appears
     int c;
     long size = 0;
 
