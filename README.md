@@ -132,7 +132,7 @@ Ransomware:
 
 #### Shannon's entropy
 
-Shannon's entropy is a mathematical function which, intuitively, corresponds to the quantity of information contained in an information source. This source can be a text written in a given language, an electric signal or a random informatic file (octets). The more the source emits different informations, the bigger the entropy. For example, if a source always sends the same symbol, for example the letter 'a', then its entropy is none, or minimal.
+Shannon's entropy is a mathematical function which, intuitively, corresponds to the quantity of information contained in a source. This source can be a text written in a given language, an electric signal or a random informatic file (octets). The more the source emits different informations, the bigger the entropy. For example, if a source always sends the same symbol, for example the letter 'a', then its entropy is none, or minimal.
 
 In maths, an average is calculated with:
 
